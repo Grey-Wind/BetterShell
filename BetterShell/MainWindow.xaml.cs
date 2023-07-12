@@ -75,8 +75,22 @@ namespace BetterShell
                     return;
                 }
 
+                if (string.IsNullOrWhiteSpace(command))
+                {
+                    // 如果命令为空或只包含空白字符，则不执行任何操作
+                    return;
+                }
+
                 // 清除编辑框内容
                 InputTextBox.Clear();
+
+                await Task.Delay(150); // 等待0.15秒
+
+                if (!string.IsNullOrWhiteSpace(InputTextBox.Text))
+                {
+                    // 如果在等待后仍然有内容，则再次尝试清除
+                    InputTextBox.Clear();
+                }
 
                 if (command.ToLower() == "powershell" || command.ToLower() == "cmd")
                 {
